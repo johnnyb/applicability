@@ -1,0 +1,62 @@
+= Copyright Notice and Legal Information
+
+Applicability is Copyright 2007 New Medio.
+
+Applicability is free software; you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation; either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+The LGPL is in the file LGPL.txt and the GPL is in the file GPL.txt .
+
+= Applicability
+
+Many times when writing forms, it would be nice to be able to easily make fields visible or invisible based on certain conditions. Applicability allows you to easily make, without writing any Javascript yourself, forms whose elements depend on certain actions or conditions.
+
+Applicability originated as part of New Medio's Reach system.  You can find out more about New Medio at http://www.newmedio.com/
+
+== Download
+
+Available from subversion:
+
+        http://applicability.googlecode.com/svn/trunk/
+
+== Installation
+
+To install as a Rails plugin (this is how you should install it):
+
+   > script/plugin install http://applicability.googlecode.com/svn/trunk/applicability
+
+== Sample Usage
+
+In your <tt>.rhtml</tt> file:
+
+  <% applicability_begin(:main_option) do |apc| %>
+     <label for="the_option">Please Choose</label><br />
+     <%= apc.select_tag "option_chose", [["Main Option", :main_option, "main"], ["Another Option", :another_option, "another"]], :default => "main" %>
+
+     <% apc.applies_to(:div, :main_option) do %>
+        You Chose the Main Option!  Here is the rest of your form...<br />
+        blah blah blah...
+     <% end %>
+     <% apc.applies_to(:div, :another_option) do %>
+        You chose the other option!  Here is the rest of your form...<br />
+        blah  blah blah...
+     <% end %>
+
+     <div>This is shared between the forms</div>
+
+     <% apc.applies_to(:div, :main_option) do %>
+        Here is another section for the main option only.
+     <% end %>
+  <% end %>
+
+This creates Javascript code so that when you choose the main option in your select tag, it turns on the main option stuff in the "applies_to" section (actually, because applicability_begin was called with :main_option that is the default one that shows).
