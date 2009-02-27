@@ -23,17 +23,11 @@ Many times when writing forms, it would be nice to be able to easily make fields
 
 Applicability originated as part of New Medio's Reach system.  You can find out more about New Medio at http://www.newmedio.com/
 
-== Download
-
-Available from subversion:
-
-        http://applicability.googlecode.com/svn/trunk/
-
 == Installation
 
 To install as a Rails plugin (this is how you should install it):
 
-   > script/plugin install http://applicability.googlecode.com/svn/trunk/applicability
+   > script/plugin install git://github.com/johnnyb/applicability.git
 
 == Sample Usage
 
