@@ -13,7 +13,7 @@ module Applicability
     # applicability area tag to activate.  This automatically handles outputting the javascript for you
     # at the end of the block.  Dummy is no longer used, but here for backwards compatibility.
     def applicability_begin(dummy = nil, &block)
-      apc = ApplicabilityContext.new()
+      apc = ApplicabilityContext.new(self)
       if block_given?
         yield(apc)
         concat(apc.output_applicability_function, block.binding) 
@@ -34,17 +34,28 @@ module Applicability
 
     @@id_num = 1
 
-    # Takes one optional parameter - the area tag to activate by default.
-    def initialize()
+    # view is used for rendering the output buffer
+    def initialize(view)
       @areas = []
       @base_id = idgen
       @function_name = "reach_applic_#{@base_id}_func"
       @domains = []
+
+      @view = view
+    end
+
+    # For new Rails versions
+    def output_buffer
+      @view.output_buffer
+    end
+
+    def output_buffer=(val)
+      @view.output_buffer = val
     end
 
     # NOT YET IMPLEMENTED - will work like select_tag, but with the semantics of select
     def select
-    end
+    en
 
     # NOT FINISHED/TESTED - this will link to an area tag to activate.
     def link_to(name, tag, *args)
