@@ -55,7 +55,7 @@ module Applicability
 
     # NOT YET IMPLEMENTED - will work like select_tag, but with the semantics of select
     def select
-    en
+    end
 
     # NOT FINISHED/TESTED - this will link to an area tag to activate.
     def link_to(name, tag, *args)
