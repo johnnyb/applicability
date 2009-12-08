@@ -21,6 +21,16 @@ module Applicability
 
       return apc
     end
+
+    # This is if you require an applicability context, and someone may have
+    # sent you one, but you don't know if it is nil
+    def applicability_begin_or_continue(apc = nil, &block)
+      if apc.nil?
+        applicability_begin(&block)
+      else
+        yield(apc)
+      end
+    end
   end
 
   # This is the main context class.  You rarely instantiate this yourself - it is almost always
